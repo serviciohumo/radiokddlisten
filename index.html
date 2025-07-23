@@ -14,18 +14,19 @@
       justify-content: center; /* Centra horizontalmente */
       align-items: flex-start; /* Alinea los elementos al inicio (arriba) */
       height: 100vh;
-      padding-top: 5vh; /* Añade un poco de espacio desde la parte superior */
+      padding-top: 5vh; /* Añade un poco de espacio desde la parte superior, adaptable al alto de la pantalla */
     }
 
     .player-container {
       /* Fondo gris semi-transparente */
       background-color: rgba(128, 128, 128, 0.5); /* Gris semi-transparente */
-      padding: 20px;
-      border-radius: 16px;
+      padding: 15px; /* Padding adaptable */
+      border-radius: 12px; /* Radio del borde adaptable */
       text-align: center;
-      box-shadow: 0 0 10px black; /* Mantener la sombra para un pequeño efecto */
-      width: 90%; /* Ancho responsivo */
-      max-width: 400px; /* Ancho máximo para pantallas grandes */
+      box-shadow: 0 0 8px black; /* Sombra ligera */
+      width: 90%; /* Ocupa el 90% del ancho en pantallas pequeñas */
+      max-width: 320px; /* Ancho máximo para pantallas grandes, ligeramente aumentado */
+      box-sizing: border-box; /* Asegura que el padding no aumente el ancho total */
     }
 
     /* Oculta los controles nativos del audio */
@@ -38,20 +39,20 @@
       display: flex; /* Usa flexbox para alinear los controles */
       flex-direction: column; /* Apila los elementos verticalmente */
       align-items: center; /* Centra los elementos horizontalmente */
-      gap: 15px; /* Espacio entre los elementos */
-      margin-top: 20px; /* Espacio superior para los controles */
+      gap: 10px; /* Espacio entre los elementos */
+      margin-top: 15px; /* Espacio superior para los controles */
     }
 
     .custom-controls button {
       background-color: #0000FF; /* Color azul para el botón */
       color: white;
       border: none;
-      padding: 10px 20px;
-      border-radius: 8px;
+      padding: 0.8em 1.6em; /* Padding en unidades em para mejor adaptabilidad */
+      border-radius: 6px; /* Radio del borde adaptable */
       cursor: pointer;
-      font-size: 1.2em;
+      font-size: 1em; /* Tamaño de fuente adaptable */
       transition: background-color 0.3s ease;
-      width: 150px; /* Ancho fijo para el botón */
+      width: 120px; /* Ancho fijo para el botón */
     }
 
     .custom-controls button:hover {
@@ -62,22 +63,23 @@
     .volume-control {
       display: flex;
       align-items: center;
-      gap: 10px;
-      width: 80%; /* Ancho del control de volumen */
-      max-width: 250px; /* Ancho máximo */
+      gap: 8px; /* Espacio adaptable */
+      width: 90%; /* Ancho del control de volumen adaptable */
+      max-width: 250px; /* Ancho máximo para el control de volumen */
     }
 
     .volume-control label {
       color: white; /* Color del texto de la etiqueta */
-      font-size: 0.9em;
+      font-size: 0.8em; /* Tamaño de fuente adaptable */
+      white-space: nowrap; /* Evita que el texto "Volumen:" se rompa en varias líneas */
     }
 
     .volume-control input[type="range"] {
       -webkit-appearance: none; /* Elimina estilos predeterminados de WebKit */
       width: 100%;
-      height: 8px;
+      height: 6px; /* Altura de la barra adaptable */
       background: #ddd; /* Color del fondo de la barra */
-      border-radius: 5px;
+      border-radius: 3px; /* Radio del borde adaptable */
       outline: none;
       opacity: 0.7;
       transition: opacity .2s;
@@ -90,16 +92,16 @@
     .volume-control input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
       appearance: none;
-      width: 20px;
-      height: 20px;
+      width: 16px; /* Tamaño del "pulgar" adaptable */
+      height: 16px; /* Tamaño del "pulgar" adaptable */
       background: #0000FF; /* Color azul del "pulgar" del deslizador */
       border-radius: 50%;
       cursor: pointer;
     }
 
     .volume-control input[type="range"]::-moz-range-thumb {
-      width: 20px;
-      height: 20px;
+      width: 16px; /* Tamaño del "pulgar" adaptable */
+      height: 16px; /* Tamaño del "pulgar" adaptable */
       background: #0000FF; /* Color azul del "pulgar" del deslizador */
       border-radius: 50%;
       cursor: pointer;
@@ -108,8 +110,6 @@
 </head>
 <body>
   <div class="player-container">
-    <!-- Se han eliminado los elementos h2 y p -->
-
     <!-- El elemento de audio sin controles nativos -->
     <audio id="radioAudio">
       <source src="https://uk14freenew.listen2myradio.com/live.mp3?typeportmount=s1_8461_stream_691310980" type="audio/mpeg">
