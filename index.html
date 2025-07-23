@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio Kedada Musiical</title>
+  <style>
+    body {
+      margin: 0;
+      background: url('https://i.postimg.cc/kXC13Szp/LOGO-ICRO-VIVO2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center; /* Centra horizontalmente */
+      align-items: flex-start; /* Alinea los elementos al inicio (arriba) */
+      height: 100vh;
+      padding-top: 5vh; /* Añade un poco de espacio desde la parte superior */
+    }
+
+    .player-container {
+      /* Fondo gris semi-transparente */
+      background-color: rgba(128, 128, 128, 0.5); /* Gris semi-transparente */
+      padding: 20px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 0 10px black; /* Mantener la sombra para un pequeño efecto */
+      width: 90%; /* Ancho responsivo */
+      max-width: 400px; /* Ancho máximo para pantallas grandes */
+    }
+
+    /* Oculta los controles nativos del audio */
+    audio {
+      display: none;
+    }
+
+    /* Estilos para el botón de control personalizado */
+    .custom-controls {
+      display: flex; /* Usa flexbox para alinear los controles */
+      flex-direction: column; /* Apila los elementos verticalmente */
+      align-items: center; /* Centra los elementos horizontalmente */
+      gap: 15px; /* Espacio entre los elementos */
+      margin-top: 20px; /* Espacio superior para los controles */
+    }
+
+    .custom-controls button {
+      background-color: #0000FF; /* Color azul para el botón */
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1.2em;
+      transition: background-color 0.3s ease;
+      width: 150px; /* Ancho fijo para el botón */
+    }
+
+    .custom-controls button:hover {
+      background-color: #0000CC; /* Azul un poco más oscuro al pasar el ratón */
+    }
+
+    /* Estilos para el deslizador de volumen */
+    .volume-control {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      width: 80%; /* Ancho del control de volumen */
+      max-width: 250px; /* Ancho máximo */
+    }
+
+    .volume-control label {
+      color: white; /* Color del texto de la etiqueta */
+      font-size: 0.9em;
+    }
+
+    .volume-control input[type="range"] {
+      -webkit-appearance: none; /* Elimina estilos predeterminados de WebKit */
+      width: 100%;
+      height: 8px;
+      background: #ddd; /* Color del fondo de la barra */
+      border-radius: 5px;
+      outline: none;
+      opacity: 0.7;
+      transition: opacity .2s;
+    }
+
+    .volume-control input[type="range"]:hover {
+      opacity: 1;
+    }
+
+    .volume-control input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 20px;
+      height: 20px;
+      background: #0000FF; /* Color azul del "pulgar" del deslizador */
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .volume-control input[type="range"]::-moz-range-thumb {
+      width: 20px;
+      height: 20px;
+      background: #0000FF; /* Color azul del "pulgar" del deslizador */
+      border-radius: 50%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="player-container">
+    <!-- Se han eliminado los elementos h2 y p -->
+
+    <!-- El elemento de audio sin controles nativos -->
+    <audio id="radioAudio">
+      <source src="https://uk14freenew.listen2myradio.com/live.mp3?typeportmount=s1_8461_stream_691310980" type="audio/mpeg">
+      Tu navegador no soporta audio HTML5.
+    </audio>
+
+    <!-- Controles personalizados -->
+    <div class="custom-controls">
+      <button id="playPauseButton">Reproducir</button>
+      <div class="volume-control">
+        <label for="volumeSlider">Volumen:</label>
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.5">
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const radioAudio = document.getElementById('radioAudio');
+    const playPauseButton = document.getElementById('playPauseButton');
+    const volumeSlider = document.getElementById('volumeSlider');
+
+    // Establecer el volumen inicial del audio al valor del deslizador
+    radioAudio.volume = volumeSlider.value;
+
+    playPauseButton.addEventListener('click', () => {
+      if (radioAudio.paused) {
+        radioAudio.play();
+        playPauseButton.textContent = 'Pausar';
+      } else {
+        radioAudio.pause();
+        playPauseButton.textContent = 'Reproducir';
+      }
+    });
+
+    // Escuchar cambios en el deslizador de volumen
+    volumeSlider.addEventListener('input', () => {
+      radioAudio.volume = volumeSlider.value;
+    });
+
+    // Opcional: Actualizar el botón si el audio termina o se detiene por otras razones
+    radioAudio.addEventListener('ended', () => {
+      playPauseButton.textContent = 'Reproducir';
+    });
+    radioAudio.addEventListener('pause', () => {
+      if (!radioAudio.ended) { // Solo si no terminó la reproducción
+        playPauseButton.textContent = 'Reproducir';
+      }
+    });
+  </script>
+</body>
+</html>
